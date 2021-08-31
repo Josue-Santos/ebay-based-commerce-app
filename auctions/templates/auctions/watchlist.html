@@ -1,0 +1,34 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+   
+   
+    <h1 id="listings_heading">Watch List</h1>
+    
+    {% for listing in watchlist %}
+        {% if user.username == listing.user.username%}
+        <div class="listings_container">
+            <div class = "listing_picture">
+                
+                {% if listing.listing.image != "" %}
+                    <img src={{listing.listing.image}} height="300px" width ="300px" alt="image">
+                {% else %}
+                    <img src="https://www.allianceplast.com/wp-content/uploads/2017/11/no-image.png"
+                    height="300px" width="300px" alt="image">
+                {% endif %}
+            </div>
+            <div class = "listing_info">
+                <a href="{% url 'listing' listing.listing.id %}"><h1>{{listing.listing.title}}</h1></a>
+                <p>{{listing.listing.description}}</p>
+                <p><b>Price</b>: ${{listing.listing.starting_bid}}</p>
+                <p>Created {{listing.listing.date}}</p>
+                
+            </div>
+        </div>
+        {% endif %}
+       
+    {% empty %}
+        <h3 id ="no_listings">No listings added to Watch List</h3>  
+    {% endfor %}
+  
+{% endblock %}

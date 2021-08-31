@@ -1,0 +1,166 @@
+body {
+    padding: 10px;
+    
+}
+#listing_title{
+    position: relative;
+    top:-60px;
+    left:40%;
+    width: 600px;
+    font-size: xx-large;
+    
+}
+#comment_form{
+    position: relative;
+    top:0px;
+    left:40px;
+    width: 500px;
+    height:80px;
+}
+#comment_submit{
+    position: relative;
+    background-color: aqua;
+    left:320px;
+    top:-65px;
+}
+#empty_comments{
+    position:relative;
+    left:100px;
+    top:30px;
+}
+#comments{
+    position: relative;
+    padding: 10px;
+    left:5%;
+}
+#watchlist_counter{
+    position: relative;
+    color:white;
+    left:325px;
+    top:-65px;
+    background-color: grey;
+    border: 2px black solid;
+    width: 20px;
+    height: 25px;
+}
+#watchlist_link{
+    position: relative;
+    left:10px;
+    
+}
+#remove_link{
+    position:relative;
+    left:250px;
+    top:30px;
+}
+
+#listings_heading{
+    position: relative;
+    top:20px;
+    left:40%;
+    width: 400px;
+    font-size: xx-large;
+}
+.listings_container{
+    position: relative;
+    top: 20px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 20px;
+    width: 98%;
+    height: 400px;
+    margin: 15px;
+}
+.listing_picture{
+    position:relative;
+    left:420px;
+    top:30px;
+    width: 400px;
+}
+.single_listing_picture{
+    position:relative;
+    left:420px;
+    top:-330px;
+    width: 400px;
+}
+.single_listing_info{
+    position:relative;
+    left:60%;
+    top:-600px;
+    width: fit-content;
+    font-size:large
+}
+.listing_info{
+    position:relative;
+    left:60%;
+    top:-200px;
+    width: fit-content;
+    font-size:large
+}
+#listing_comments{
+    position:relative;
+    border: 2px solid black;
+    width:400px;
+    height:360px;
+    overflow: auto;
+}
+.listing_listing_info{
+    position:relative;
+    left:60%;
+    top:-230px;
+    width: fit-content;
+    font-size:large
+}
+.bid_container{
+    position: relative;
+    left:1150px;
+    top:-230px;
+    width: 300px;  
+}
+#no_listings{
+    position:relative;
+    top:200px;
+    left:500px;
+}
+#create_heading{
+    position:relative;
+    left:40%;
+    width: 300px;
+    
+}
+#create_form{
+    position:relative;
+    width: 600px;
+    left:32%;
+    top:10px;
+    padding: 20px;
+
+}
+.create_form_items{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    width: 500px;
+    height: 40px;
+}
+#create_form_description{
+    width: 500px;
+    height: 200px;
+    border-radius: 10px;
+
+}
+#radio_categories{
+    width:fit-content;
+}
+
+#error_message{
+    position: relative;
+    top:10px;
+    width: 400px;
+    color:red;
+}
+.categories{
+    position: relative;
+    left: 100px;
+    color: rgb(81, 149, 175);
+}

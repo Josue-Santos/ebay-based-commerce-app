@@ -1,0 +1,40 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+        <h6 id= watchlist_counter>{{count}}</h6>
+    {% endif %}
+    <h1 id="create_heading">CREATE LISTING</h1>
+    <div id="create_form">
+        <form action="{% url 'create' %}" method="POST">
+            {% csrf_token %}
+            <input class="create_form_items" type="text" name="title" placeholder="Enter Title"><br>
+            <textarea  id="create_form_description" rows="4" cols="50" name="description" placeholder="Enter Description Here..."></textarea><br>
+            <input class="create_form_items" type="number" step="0.01"  name="starting_bid" placeholder="0.00"><br>
+            <input class="create_form_items" type="text" name="image" placeholder ="Enter Image Url Here"><br>
+            <div id=radio_categories>
+                <h6>CATEGORY: </h6> 
+                <input type="radio" name="category" value="" checked>
+                <label for ="">None</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="category" value="FASHION">
+                <label for ="">FASHION</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="category" value="TOYS">
+                <label for ="">TOYS</label><br>
+                <input type="radio" name="category" value="ELECTRONICS">
+                <label for ="">ELECTRONICS</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="category" value="HOME">
+                <label for ="">HOME</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="category" value="SPORTS">
+                <label for ="">SPORTS</label><br>
+                <input type="radio" name="category" value="PETS">
+                <label for ="">PETS</label>&nbsp;&nbsp;&nbsp;&nbsp;
+               
+            </div>
+            
+            <input style="position:relative;left:10%;width: 200px;" class="btn btn-primary" type="Submit" value="Create">
+        
+        </form>
+    </div>
+
+
+{% endblock %}

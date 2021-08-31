@@ -1,0 +1,109 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <div>
+        {% if user.is_authenticated %}
+            <h6 id= watchlist_counter>{{count}}</h6>
+        {% endif %}
+    </div>
+    {% if user.is_authenticated %}
+        <form id="comment_form" action="{% url 'comment' listing.id %}" method="POST">
+            {% csrf_token %}
+            <textarea  id="comment_textarea" rows="3" cols="40" name="comment" placeholder="Enter Comment Here..."></textarea><br>
+            <input id="comment_submit" type="submit" value="Comment">
+        </form>
+    {% endif %}
+    <h1 id="listing_title">Listing: {{listing.title}}</h1>
+   
+
+    <div class="listings_container">
+        <div id="listing_comments">
+                {% for comment in comments %}
+                    {% if comment.listing.id == listing.id %}
+                    <h6 id = "comments">
+                        ><a href="{% url 'user' comment.user %}" >{{comment.user.username}}</a>--- {{comment.comment}}</h6>
+                    {% endif %}
+                {% empty %}
+                    <h6 id="empty_comments">No comments available.</h6>
+                {% endfor %}
+
+        </div>
+        {% if listing.image != "" %}
+            <div class = "single_listing_picture">
+            <img  src={{listing.image}} height="300px" width ="300px" alt="image">
+        {% else %}
+            <img src="https://www.allianceplast.com/wp-content/uploads/2017/11/no-image.png"
+            height="300px" width="300px" alt="image">
+        {% endif %}
+    </div>
+    <div class="single_listing_info">
+        <p>{{listing.description}}</p>
+        <h1><b>${{listing.starting_bid}}</b></h1>
+        <h3>Details</h3>
+        {% if current_user_listing == True %}
+            <li>Listed By: <a href="{% url 'user' listing.listed_by %}">You</a></li>
+            {% else %}
+                <li>Listed By: <a href="{% url 'user' listing.listed_by %}" >{{listing.listed_by}}</a></li>
+        {% endif %}
+        <li>Category:
+            {% if listing.category == "" %}
+                No category Listed
+            {% else %}
+                {{listing.category}}
+            {% endif %}
+        </li><br>
+        {% if user.is_authenticated %}
+            {% for x in watchlist%}
+                {% if x.listing.id == listing.id and x.user.username == user.username %}
+                    <a id ="remove_link" href="{% url 'removefromwatchlist' user listing.id %}">Remove From WatchList</a> 
+                {% endif %}
+            {% endfor %}
+            {% if found == False %}
+                <a id ="watchlist_link" href="{% url 'addtowatchlist' listing.id %}">Add To WatchList</a> <br>
+            {% endif %}
+
+        {% endif %}
+    </div>
+    </div>
+    <div class="bid_container">
+        {% if user.is_authenticated %}
+            <p>{{bid_counter}} bid(s) so far. 
+            {% if current_max_bid == True %}
+                Your bid is the current bid.</p> 
+            {% endif %}
+            {% if current_user_listing == False and sold == "False" %}
+                <form action="{% url 'listing' listing.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="number" step="0.01" value="Bid" name ="new_bid">
+                    <input type="submit" value = "Place Bid" style="background-color:rgb(44, 235, 235);color: white;" >
+                </form> 
+                <h6>Current Max Bid: {{max_bid}}</h6>
+                <h6 id ="error_message">{{message}}</h6>
+            {% endif %}
+            
+            {% if current_user_listing == False and sold == "True" and user.username != current_max_bid_user %}
+                <h6 style="color: red;">ITEM SOLD</h6>
+            {% endif %}
+            {% if current_user_listing == False and sold == "True" and user.username == current_max_bid_user %}
+                <h6 style="color:rgb(68, 223, 54)">Purchased by You</h6>
+            {% endif %}
+
+            {% if current_user_listing == True %}
+                {% if bid_counter > 0 %}
+                    {% if sold == "False" %}
+                        <form action="{% url 'sell' listing.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" value = "Accept Highest Bid (SELL)" style="background-color:rgb(44, 235, 235);" >
+                        </form>
+                    {% endif %}
+                    {% if sold == "True" %}
+                        <h5 style="color:rgb(68, 223, 54)">Sold for:  ${{max_bid}}</h5>
+                    {% endif %}
+ 
+                {% endif %}
+            {% endif %}
+               
+        {% endif %}
+    </div>
+    
+{% endblock %}

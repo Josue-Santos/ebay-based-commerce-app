@@ -1,0 +1,32 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+        <h6 id= watchlist_counter>{{count}}</h6>
+    {% endif %}
+
+    <h2 id="listings_heading">Category: {{category}}</h2>
+
+     {% for listing in listings %}
+        {% if listing.category == category and listing.sold == "False" %}
+            <div class="listings_container">
+                <div class = "listing_picture">
+                    {% if listing.image != "" %}
+                        <img src={{listing.image}} height="300px" width ="300px" alt="image">
+                    {% else %}
+                        <img src="https://www.allianceplast.com/wp-content/uploads/2017/11/no-image.png"
+                        height="300px" width="300px" alt="image">
+                    {% endif %}
+                </div>
+                <div class = "listing_info">
+                    <a href="{% url 'listing' listing.id %}"><h1>{{listing.title}}</h1></a>
+                    <p>{{listing.description}}</p>
+                    <p><b>Price</b>: ${{listing.starting_bid}}</p>
+                    <p>Created {{listing.date}}</p>
+                    
+                </div>
+            </div>
+        {% endif %}
+        
+    {% endfor %}
+{% endblock %}
